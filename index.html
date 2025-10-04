@@ -57,6 +57,8 @@
         box-shadow: 0 0 10px #4ade80, 0 0 5px white;
       }
     </style>
+  <!-- Thêm Babel Standalone để dịch TypeScript/TSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="importmap">
 {
   "imports": {
@@ -70,7 +72,8 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
+    <!-- Thay đổi type để Babel có thể xử lý file .tsx -->
+    <script type="text/babel" data-type="module" src="index.tsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
