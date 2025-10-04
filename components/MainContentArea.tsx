@@ -1,16 +1,17 @@
 import React from 'react';
-import { Player, TranPhap, Item, PotentialStats, WorldMapArea, EquipmentSlot } from '../types.ts';
-import CharacterPanel from './CharacterPanel.tsx';
-import InventoryPanel from './InventoryPanel.tsx';
-import AdventurePanel from './AdventurePanel.tsx';
-import SkillDisplay from './SkillDisplay.tsx';
-import FormationPanel from './FormationPanel.tsx';
-import StorePanel from './StorePanel.tsx';
-import WorldMapPanel from './WorldMapPanel.tsx';
-import QuestPanel from './QuestPanel.tsx';
-import CompanionPanel from './CompanionPanel.tsx';
+import { Player, TranPhap, Item, PotentialStats, WorldMapArea, EquipmentSlot } from '../types';
+import CharacterPanel from './CharacterPanel';
+import InventoryPanel from './InventoryPanel';
+import AdventurePanel from './AdventurePanel';
+import SkillDisplay from './SkillDisplay';
+import FormationPanel from './FormationPanel';
+import StorePanel from './StorePanel';
+import WorldMapPanel from './WorldMapPanel';
+import QuestPanel from './QuestPanel';
+import CompanionPanel from './CompanionPanel';
 
 interface MainContentAreaProps {
+  apiKey: string | null;
   activePanel: string;
   player: Player;
   isCultivating: boolean;
@@ -42,7 +43,7 @@ interface MainContentAreaProps {
 }
 
 const MainContentArea: React.FC<MainContentAreaProps> = (props) => {
-  const { activePanel, player } = props;
+  const { activePanel, player, apiKey } = props;
 
   const renderContent = () => {
     switch (activePanel) {
@@ -63,7 +64,7 @@ const MainContentArea: React.FC<MainContentAreaProps> = (props) => {
       case 'inventory':
         return <InventoryPanel player={player} onItemUse={props.onItemUse} onEquip={props.onEquipItem} />;
       case 'adventure':
-        return <AdventurePanel onStartBattle={props.onStartBattle} onReceiveReward={props.onReceiveReward} />;
+        return <AdventurePanel onStartBattle={props.onStartBattle} onReceiveReward={props.onReceiveReward} apiKey={apiKey} />;
       case 'quest':
         return <QuestPanel quests={player.quests} />;
       case 'skills':
